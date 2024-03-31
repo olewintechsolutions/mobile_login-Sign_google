@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta
+      name="google-signin-client_id"
+      content="240890771911-4v1j3shto60u2abh3smgdce8b1gbo2ji.apps.googleusercontent.com"
+      ,
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <title>BestaSangamAssociation</title>
+    <script src="./backend_servers/loginpage .js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .g-sign-in-button {
+        margin: 10px;
+        display: inline-block;
+        width: 250px;
+        height: 50px;
+        background-color: #4285f4;
+        color: #fff;
+        border-radius: 1px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+        isolation: isolate;
+        position: relative;
+      }
+      .g-sign-in-button::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background-color: black;
+        inset: 0;
+        scale: 0 1;
+        transition: scale 300ms;
+      }
+      .g-sign-in-button:hover::after,
+      .g-sign-in-button:focus-visible::after {
+        scale: 1 1;
+      }
+      .g-sign-in-button:hover {
+        cursor: pointer;
+        -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+        box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+      }
+
+      .g-sign-in-button:active {
+        background-color: #3367d6;
+        transition: background-color 0.2s;
+      }
+
+      .g-sign-in-button .content-wrapper {
+        height: 100%;
+        width: 100%;
+        border: 1px solid transparent;
+      }
+
+      .g-sign-in-button img {
+        width: 25px;
+        height: 25px;
+      }
+
+      .g-sign-in-button .logo-wrapper {
+        padding: 10px;
+        background: #fff;
+        width: 45px;
+        height: 100%;
+        border-radius: 1px;
+        display: inline-block;
+      }
+
+      .g-sign-in-button .text-container {
+        font-family: "Poppins", arial, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.21px;
+        font-size: 14px;
+        line-height: 45px;
+        vertical-align: top;
+        border: none;
+        display: inline-block;
+        text-align: center;
+        width: 180px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="container col-6 text-center d-inline-block justify-content-center mx-auto"
+    >
+      <h1 class="fw-bold">Your Company Name</h1>
+    </div>
+    <hr />
+
+    <div class="g-sign-in-button" id="loggoogle">
+      <div class="content-wrapper">
+        <div class="logo-wrapper">
+          <img
+            src="https://developers.google.com/identity/images/g-logo.png"
+            alt="/"
+          />
+        </div>
+        <span class="text-container">
+          <span id="loggoogle">Continue with Google</span>
+        </span>
+      </div>
+    </div>
+    <div class="g-sign-in-button">
+      <div class="content-wrapper">
+        <div class="logo-wrapper">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/007/873/184/small/mobile-phone-icon-logo-illustration-suitable-for-web-design-logo-application-free-vector.jpg"
+            alt=""
+          />
+        </div>
+        <span class="text-container">
+          <span>Login with Mobile</span>
+        </span>
+      </div>
+    </div>
+    <a href="#" onclick="signOut();">Sign out</a>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyB154hDTqEk5l04hJD_HNkvyoJTPCnrHf0",
+        authDomain: "bestasangam-90a22.web.app",
+        databaseURL: "https://bestasangam-90a22-default-rtdb.firebaseio.com",
+        projectId: "bestasangam-90a22",
+        storageBucket: "bestasangam-90a22.appspot.com",
+        messagingSenderId: "488980833281",
+        appId: "1:488980833281:web:185d0739e73224d4038c00",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+      const analytics = getAnalytics(app);
+      const provider = new GoogleAuthProvider(app);
+
+      loggoogle.addEventListener("click", function () {
+        signInWithRedirect(auth, provider);
+        getRedirectResult(auth)
+          .then((result) => {
+            // This gives you a Google Access Token. You can use it to access Google APIs.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+
+            // The signed-in user info.
+            const user = result.user;
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+            console.log("Logged in As: " + user);
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            console.log(errorMessage);
+          });
+      });
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </body>
+</html>
